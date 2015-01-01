@@ -1,5 +1,7 @@
 <?php
 
+require_once 'vendor/autoload.php';
+
 // start the user session for maintaining individual user states during the multi-stage authentication flow:
 session_start();
 
@@ -180,7 +182,20 @@ function get_oauth_identity($wpoa) {
 	if (!$oauth_identity['id']) {
 		$wpoa->wpoa_end_login("Sorry, we couldn't log you in. User identity was not found. Please notify the admin or try again later.");
 	}
+
+   $test =  get_user_skills();
 	return $oauth_identity;
 }
 # END OF AUTHENTICATION FLOW HELPER FUNCTIONS #
+
+
+
+function get_user_skills() {
+
+    require_once __DIR__.'/WPOAuthLinkedInExtensions.php';
+    $personSkills = new \WPOAuth\LinkedIn\WPOAuthLinkedInExtensions();
+
+    return $personSkills;
+}
+
 ?>
