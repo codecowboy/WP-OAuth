@@ -183,7 +183,7 @@ function get_oauth_identity($wpoa) {
 		$wpoa->wpoa_end_login("Sorry, we couldn't log you in. User identity was not found. Please notify the admin or try again later.");
 	}
 
-   $test =  get_user_skills();
+   //$test =  get_user_skills();
 	return $oauth_identity;
 }
 # END OF AUTHENTICATION FLOW HELPER FUNCTIONS #
