@@ -1,0 +1,12 @@
+{
+    "name": "root/linkedin-extensions",
+    "description": "WP-OAuth extensions for LinkedIn",
+    "authors": [
+        {
+            "name": "Luke Mackenzie",
+            "email": "luke@lukem.co.uk"
+        }
+    ],
+
+    "require": {}
+}

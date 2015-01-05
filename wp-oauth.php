@@ -376,7 +376,7 @@ Class WPOA {
 	function wpoa_login_user($oauth_identity) {
 		// store the user info in the user session so we can grab it later if we need to register the user:
 		$_SESSION["WPOA"]["USER_ID"] = $oauth_identity["id"];
-		// try to find a matching wordpress user for the now-authenticated user's oauth identity:
+        $_SESSION["WPOA"]["EMAIL_ADDRESS"] = $oauth_identity['emailAddress'];		// try to find a matching wordpress user for the now-authenticated user's oauth identity:
 		$matched_user = $this->wpoa_match_wordpress_user($oauth_identity);
 		// handle the matched user if there is one:
 		if ( $matched_user ) {

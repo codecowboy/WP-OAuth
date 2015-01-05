@@ -6,14 +6,15 @@
  * Time: 09:43
  */
 
-namespace WPOAuth\LinkedIn;
+namespace CC\LinkedIn;
 
-use \League\OAuth2\Client\Provider;
+use \League\OAuth2\Client\Provider as league;
 
-class WPOAuthLinkedInExtensions extends Provider\LinkedIn {
+class CCLinkedInExtensions extends league\LinkedIn {
 
     function getPersonSkills() {
 
+        error_log('yay');
         return 'yay';
 
 
