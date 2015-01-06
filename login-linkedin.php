@@ -1,8 +1,5 @@
 <?php
 
-//require composer's autoloader
-require_once 'vendor/autoload.php';
-
 // start the user session for maintaining individual user states during the multi-stage authentication flow:
 session_start();
 

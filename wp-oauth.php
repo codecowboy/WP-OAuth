@@ -10,6 +10,9 @@ Author URI: http://glassocean.net
 License: GPL2
 */
 
+//require composer's autoloader
+require_once 'vendor/autoload.php';
+
 // start the user session for persisting user/login state during ajax, header redirect, and cross domain calls:
 session_start();
 
@@ -375,8 +378,9 @@ Class WPOA {
 	// login (or register and login) a wordpress user based on their oauth identity:
 	function wpoa_login_user($oauth_identity) {
 		// store the user info in the user session so we can grab it later if we need to register the user:
+
 		$_SESSION["WPOA"]["USER_ID"] = $oauth_identity["id"];
-        $_SESSION["WPOA"]["EMAIL_ADDRESS"] = $oauth_identity['emailAddress'];		// try to find a matching wordpress user for the now-authenticated user's oauth identity:
+        $_SESSION["WPOA"]["EMAIL_ADDRESS"] = $oauth_identity['email'];		// try to find a matching wordpress user for the now-authenticated user's oauth identity:
 		$matched_user = $this->wpoa_match_wordpress_user($oauth_identity);
 		// handle the matched user if there is one:
 		if ( $matched_user ) {
@@ -413,7 +417,9 @@ Class WPOA {
 		$last_url = $_SESSION["WPOA"]["LAST_URL"];
 		unset($_SESSION["WPOA"]["LAST_URL"]);
 		$_SESSION["WPOA"]["RESULT"] = $msg;
-		$this->wpoa_clear_login_state();
+
+        // removed to prevent losing access token and expiry times
+		// $this->wpoa_clear_login_state();
 		$redirect_method = get_option("wpoa_login_redirect");
 		$redirect_url = "";
 		switch ($redirect_method) {
@@ -539,6 +545,10 @@ Class WPOA {
 		unset($_SESSION["WPOA"]["EXPIRES_AT"]);
 		//unset($_SESSION["WPOA"]["LAST_URL"]);
 	}
+
+    public function get_settings() {
+        return $this->settings;
+    }
 	
 	// ===================================
 	// DEFAULT LOGIN SCREEN CUSTOMIZATIONS

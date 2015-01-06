@@ -1,6 +1,7 @@
 {
     "require": {
-      "league/oauth2-client": "0.7.*"
+      "league/oauth2-client": "0.7.*",
+      "raveren/kint": "v0.9"
     },
 
   "autoload": {
