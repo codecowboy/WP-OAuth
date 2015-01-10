@@ -69,7 +69,7 @@ function get_oauth_code($wpoa) {
 		'response_type' => 'code',
 		'client_id' => CLIENT_ID,
 		'scope' => SCOPE,
-		'state' => uniqid('', true),
+		'state' => uniqid('', true), //todo investigate if this is secure enough
 		'redirect_uri' => REDIRECT_URI,
 	);
 	$_SESSION['WPOA']['STATE'] = $params['state'];
@@ -181,19 +181,10 @@ function get_oauth_identity($wpoa) {
 		$wpoa->wpoa_end_login("Sorry, we couldn't log you in. User identity was not found. Please notify the admin or try again later.");
 	}
 
-    $test =  get_user_skills();
 	return $oauth_identity;
 }
 # END OF AUTHENTICATION FLOW HELPER FUNCTIONS #
 
 
-
-function get_user_skills() {
-
-    $personSkills = new \CC\LinkedIn\CCLinkedInExtensions();
-    $personSkills->getPersonSkills();
-    error_log('testing autoload');
-    return $personSkills;
-}
 
 ?>

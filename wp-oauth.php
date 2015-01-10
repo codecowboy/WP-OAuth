@@ -500,8 +500,11 @@ Class WPOA {
 	// links a third-party account to an existing wordpress user account:
 	function wpoa_link_account($user_id) {
 		if ($_SESSION['WPOA']['USER_ID'] != '') {
+            //todo combine into one query and / or put in separate table
+
             add_user_meta( $user_id, 'wpoa_identity', $_SESSION['WPOA']['PROVIDER'] . '|' . $_SESSION['WPOA']['USER_ID'] . '|' . time());
             add_user_meta( $user_id, 'wpoa_linkedin_access_token',  $_SESSION['WPOA']['ACCESS_TOKEN']);
+            add_user_meta( $user_id, 'wpoa_linkedin_access_token_expires',  $_SESSION['WPOA']['EXPIRES_AT']);
 		}
 	}
 
