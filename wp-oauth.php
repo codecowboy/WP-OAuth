@@ -196,6 +196,21 @@ Class WPOA {
 			add_filter('admin_footer', array($this, 'wpoa_push_login_messages'));
 			add_filter('login_footer', array($this, 'wpoa_push_login_messages'));
 		}
+
+		//set the linkedin provider settings if enabled
+		$this->is_linkedin_enabled();
+
+	}
+
+	protected function is_linkedin_enabled()
+	{
+		if (get_option('wpoa_linkedin_api_enabled')) {
+			$this->settings['wpoa_linkedin_api_enabled'] = 1;
+			$this->settings['wpoa_linkedin_api_id'] = get_option('wpoa_linkedin_api_id');
+			$this->settings['wpoa_linkedin_api_secret'] = get_option('wpoa_linkedin_api_secret');
+			return true;
+		}
+		return false;
 	}
 	
 	// init scripts and styles for use on FRONTEND PAGES:
@@ -721,4 +736,5 @@ Class WPOA {
 
 // instantiate the plugin class ONCE and maintain a single instance (singleton):
 WPOA::get_instance();
+
 ?>

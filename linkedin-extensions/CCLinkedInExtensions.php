@@ -17,39 +17,24 @@ class CCLinkedInExtensions extends league\LinkedIn {
     public $scopes = ['r_fullprofile r_emailaddress r_contactinfo'];
     public $fields = [
         'id', 'email-address', 'first-name', 'last-name', 'headline',
-        'location', 'industry', 'picture-url', 'public-profile-url', 'skills'
+        'location', 'industry', 'picture-url', 'public-profile-url',
+        'skills', 'recommendations-received', 'three-current-positions',
+        'three-past-positions'
     ];
-
-    public function getUserSkills(AccessToken $token)
-    {
-
-        return $this->fetchUserSkills($token);
-    }
-
-    protected function fetchUserSkills(AccessToken $token)
-    {
-
-        $url = $this->urlUserProfile($token);
-        $response =  $this->fetchProviderData($url);
-        return $this->userDetails(json_decode($response), $token);
-
-    }
-
-    public function urlUserProfile(AccessToken $token)
-    {
-        return 'https://api.linkedin.com/v1/people/~:('.implode(",", $this->fields)
-        .')?format=json&oauth2_access_token='.$token;
-    }
 
     public function userDetails($response, AccessToken $token)
     {
         $user = new User();
-//d($response);
         $email = (isset($response->emailAddress)) ? $response->emailAddress : null;
         $location = (isset($response->location->name)) ? $response->location->name : null;
         $description = (isset($response->headline)) ? $response->headline : null;
         $pictureUrl = (isset($response->pictureUrl)) ? $response->pictureUrl : null;
+        $skills = (isset($response->skills)) ? $response->skills : null;
+        $recommendations = (isset($response->recommendationsReceived)) ? $response->recommendationsReceived : null;
+        $currentPositions = (isset($response->threeCurrentPositions)) ? $response->threeCurrentPositions : null;
+        $pastPositions = (isset($response->threePastPositions)) ? $response->threePastPositions : null;
 
+        //used by league\user
         $user->exchangeArray([
                                  'uid' => $response->id,
                                  'name' => $response->firstName.' '.$response->lastName,
@@ -63,10 +48,13 @@ class CCLinkedInExtensions extends league\LinkedIn {
 
                              ]);
 
+        return array('user'=>$user,
+                     'skills' => $skills,
+                     'recommendations' => $recommendations,
+                     'currentpositions' => $currentPositions,
+                     'pastpositions' => $pastPositions,
+            );
 
-        //todo format this better or combine into one object
-
-        return array('user'=>$user, 'skills' => $response->skills);
     }
 
 

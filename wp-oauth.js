@@ -4,7 +4,7 @@ jQuery(document).ready(function() {
 });
 
 // namespace the wpoa functions to prevent global conflicts, using the 'immediately invoked function expression' pattern:
-;(function ( wpoa, undefined ) {
+(function ( wpoa, undefined ) {
 
     // <private properties>
 	
@@ -205,7 +205,7 @@ jQuery(document).ready(function() {
 		var h = "";
 		h += "<div class='wpoa-login-message'><span>" + msg + "</span></div>";
 		jQuery("body").prepend(h);
-		jQuery(".wpoa-login-message").fadeOut(5000);
+		jQuery(".wpoa-login-message").fadeOut(1000);
 	}
 	
 	// logout:
